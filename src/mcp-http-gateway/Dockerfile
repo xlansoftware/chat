@@ -1,3 +1,7 @@
+ARG VERSION=0.0.0
+ARG COMMIT_HASH=unknown
+ARG BUILD_DATE="1970-01-01T00:00:00Z"
+
 ################
 # build stage  #
 ################
@@ -12,11 +16,19 @@ COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build
 
-
 #####################
 # runtime (non-root)#
 #####################
 FROM node:20-bookworm-slim AS runtime
+
+ARG VERSION
+ARG COMMIT_HASH
+ARG BUILD_DATE
+
+LABEL org.opencontainers.image.version=$VERSION \
+  org.opencontainers.image.revision=$COMMIT_HASH \
+  org.opencontainers.image.created=$BUILD_DATE
+
 WORKDIR /app
 
 ENV NODE_ENV=production
