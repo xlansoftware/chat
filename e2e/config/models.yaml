@@ -1,0 +1,7 @@
+models:
+  - model-name: mock-gpt-markdown
+    url: http://localhost:3030/v1
+    is-local: true
+  - model-name: mock-gpt-thinking
+    url: http://localhost:3030/v1
+    is-local: true
