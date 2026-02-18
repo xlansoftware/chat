@@ -1,0 +1,19 @@
+{
+  "name": "mcp-http-gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "export MCP_SERVERS_CONFIG=../../deploy/mcpServers.json && node --enable-source-maps --no-deprecation --trace-warnings --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

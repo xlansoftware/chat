@@ -1,0 +1,7 @@
+models:
+  - model-name: mock-gpt-markdown
+    url: http://mock-openai-api:3000/v1
+    is-local: true
+  - model-name: mock-gpt-thinking
+    url: http://mock-openai-api:3000/v1
+    is-local: true
