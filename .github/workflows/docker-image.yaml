@@ -56,12 +56,26 @@ jobs:
       - name: Build and push app image
         uses: docker/build-push-action@v5
         with:
-          context: ./src
-          file: ./.devops/build/Dockerfile.ledger-eleven-app
+          context: ./src/chat
+          file: ./src/chat/Dockerfile
           push: true
           tags: |
             ghcr.io/xlansoftware/chat:latest
             ghcr.io/xlansoftware/chat:${{ steps.docker_tag.outputs.tag }}
+          build-args: |
+            VERSION=${{ steps.docker_tag.outputs.version }}
+            COMMIT_HASH=${{ steps.commit_hash.outputs.commit_hash }}
+            BUILD_DATE=${{ steps.build_date.outputs.build_date }}
+
+      - name: Build and push mcp-http-gateway image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src/mcp-http-gateway
+          file: ./src/mcp-http-gateway/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/xlansoftware/chat-mcp-http-gateway:latest
+            ghcr.io/xlansoftware/chat-mcp-http-gateway:${{ steps.docker_tag.outputs.tag }}
           build-args: |
             VERSION=${{ steps.docker_tag.outputs.version }}
             COMMIT_HASH=${{ steps.commit_hash.outputs.commit_hash }}
