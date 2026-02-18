@@ -1,0 +1,31 @@
+{
+  "name": "xlanchat",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/skkdevcraft/llm-canvas#readme",
+  "bugs": {
+    "url": "https://github.com/skkdevcraft/llm-canvas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skkdevcraft/llm-canvas.git"
+  },
+  "license": "ISC",
+  "author": "Stoyan Krastev",
+  "type": "commonjs",
+  "private": true,
+  "workspaces": [
+    "src/chat",
+    "src/mcp-http-gateway",
+    "e2e/tests"
+  ],
+  "scripts": {
+    "dev": "cd src/chat && npm run dev",
+    "test": "cd src/chat && npm run test",
+    "start": "cd deploy && docker compose up --build",
+    "start:mock-openai-api": "npx mock-openai-api -p 3030",
+    "start:e2e": "cd src/chat && CONFIG_PATH=$INIT_CWD/e2e/config npm run start",
+    "start:e2e:container": "cd e2e/tests && npm run start",
+    "test:e2e": "cd e2e/tests && PLAYWRIGHT_HTML_HOST=0.0.0.0 npx playwright test"
+  }
+}

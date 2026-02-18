@@ -1,0 +1,31 @@
+services:
+  nextjs:
+    container_name: test-app
+    build:
+      context: ../../src/chat
+      dockerfile: Dockerfile
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    environment:
+      MCP_SERVER_ENDPOINT:
+      STORAGE_TYPE: memory
+      CONFIG_PATH: /config
+      PORT: ${PORT:-3000}
+      NODE_ENV: production
+      LOG_LEVEL: debug
+    volumes:
+      - ./models.yaml:/config/models.yaml:ro
+    restart: unless-stopped
+  mock-openai-api:
+    image: zerob13/mock-openai-api:latest
+    environment:
+      - PORT=3000
+      - VERBOSE=false
+    restart: unless-stopped

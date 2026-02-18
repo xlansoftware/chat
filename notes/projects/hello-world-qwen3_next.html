@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World - Qwen3 Next</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h1::after {
+            content: "Qwen3 Next";
+            display: block;
+            font-size: 1.2rem;
+            color: #e6f7ff;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            color: #764ba2;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Particle effects */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rise 8s infinite ease-in-out;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 2rem; width: 90%; }
+            p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1>Hello World!</h1>
+        <p>Welcome to the future of web development</p>
+        <a href="#" class="button">Explore More</a>
+    </div>
+
+    <script>
+        // Create particle effects
+        const particlesContainer = document.getElementById('particles');
+        
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random positions and sizes
+            const size = Math.random() * 15 + 5;
+            const x = Math.random() * 100;
+            const duration = Math.random() * 3 + 6;
+            const delay = Math.random() * 5;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${x}%`;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Add interactive button effect
+        const button = document.querySelector('.button');
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Create explosion effect
+            for (let i = 0; i < 15; i++) {
+                const spark = document.createElement('div');
+                spark.style.position = 'absolute';
+                spark.style.width = '8px';
+                spark.style.height = '8px';
+                spark.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 70%)`;
+                spark.style.borderRadius = '50%';
+                spark.style.left = button.getBoundingClientRect().left + button.offsetWidth / 2 + 'px';
+                spark.style.top = button.getBoundingClientRect().top + button.offsetHeight / 2 + 'px';
+                
+                document.body.appendChild(spark);
+                
+                // Animate spark
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 100 + 50;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                spark.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 800,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                setTimeout(() => spark.remove(), 800);
+            }
+        });
+    </script>
+</body>
+</html>
