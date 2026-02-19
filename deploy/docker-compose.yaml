@@ -1,9 +1,9 @@
 services:
   app:
-    image: ghcr.io/xlansoftware/chat:latest
-    # build:
-    #   context: ../src/chat
-    #   dockerfile: Dockerfile
+    # image: ghcr.io/xlansoftware/chat:latest
+    build:
+      context: ../src/chat
+      dockerfile: Dockerfile
     read_only: true
     tmpfs:
       - /tmp
@@ -28,10 +28,10 @@ services:
     restart: unless-stopped
 
   mcp-server:
-    image: ghcr.io/xlansoftware/chat-mcp-http-gateway:latest
-    # build:
-    #   context: ../src/mcp-http-gateway
-    #   dockerfile: Dockerfile
+    # image: ghcr.io/xlansoftware/chat-mcp-http-gateway:latest
+    build:
+      context: ../src/mcp-http-gateway
+      dockerfile: Dockerfile
     read_only: true
     tmpfs:
       - /tmp
