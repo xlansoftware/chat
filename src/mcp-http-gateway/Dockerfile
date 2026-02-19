@@ -1,4 +1,4 @@
-ARG VERSION=0.0.0
+ARG VERSION=0.0.0-dev
 ARG COMMIT_HASH=unknown
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
@@ -43,7 +43,7 @@ COPY --from=build /app/dist ./dist
 
 
 # Create and use a non-root user
-RUN useradd -m -u 10001 -s /usr/sbin/nologin appuser \
+RUN useradd -m -u 65532 -s /usr/sbin/nologin appuser \
   && chown -R appuser:appuser /app
 
 # Create npm cache directory for volume mount

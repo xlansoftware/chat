@@ -1,10 +1,9 @@
 services:
-  nextjs:
-    container_name: nextjs-app
-    build:
-      context: ../src/chat
-      dockerfile: Dockerfile
-    # image: nextjs-app:latest
+  app:
+    image: ghcr.io/xlansoftware/chat:latest
+    # build:
+    #   context: ../src/chat
+    #   dockerfile: Dockerfile
     read_only: true
     tmpfs:
       - /tmp
@@ -29,10 +28,10 @@ services:
     restart: unless-stopped
 
   mcp-server:
-    container_name: mcp-server
-    build:
-      context: ../src/mcp-http-gateway
-      dockerfile: Dockerfile
+    image: ghcr.io/xlansoftware/chat-mcp-http-gateway:latest
+    # build:
+    #   context: ../src/mcp-http-gateway
+    #   dockerfile: Dockerfile
     read_only: true
     tmpfs:
       - /tmp
@@ -50,6 +49,16 @@ services:
       - ./mcpServers.json:/config/mcpServers.json:ro
       - ../notes/projects:/projects
     restart: unless-stopped
+    depends_on:
+      npm-cache-permissions:
+        condition: service_completed_successfully
+
+  npm-cache-permissions:
+    image: alpine:latest
+    command: chown -R 65532:65532 /npm-cache
+    volumes:
+      - npm-cache:/npm-cache
+    user: root
 
 volumes:
   npm-cache:
