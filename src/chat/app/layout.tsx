@@ -8,6 +8,8 @@ import { PromptProvider } from "@/components/prompt/PromptProvider";
 import './globals.css';
 import { AppHistory } from '@/components/AppHistory';
 
+import { ThemeProvider } from "next-themes"
+
 export default function RootLayout({
   children,
 }: {
@@ -19,14 +21,20 @@ export default function RootLayout({
         <title>xlanchat</title>
       </head>
       <body>
-        <SidebarProvider>
-          <ConfirmProvider>
-            <PromptProvider>
-              <AppSidebar />
-              {children}
-            </PromptProvider>
-          </ConfirmProvider>
-        </SidebarProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <SidebarProvider>
+            <ConfirmProvider>
+              <PromptProvider>
+                <AppSidebar />
+                {children}
+              </PromptProvider>
+            </ConfirmProvider>
+          </SidebarProvider>
+        </ThemeProvider>
         <AppHistory />
       </body>
     </html>

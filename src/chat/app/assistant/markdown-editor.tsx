@@ -6,10 +6,15 @@ import { ThreadPrimitive } from "@assistant-ui/react";
 
 import useFileContent from "@/hooks/use-file-content";
 
+import { useTheme } from "next-themes";
+
 type Role = "user" | "assistant" | "other";
 
 export function MarkdownEditor({ threadId }: { threadId: string }) {
   const { content, updateContent, error } = useFileContent(threadId);
+
+  const { resolvedTheme } = useTheme();
+  console.log(resolvedTheme);
 
   const editorRef =
     useRef<import("monaco-editor").editor.IStandaloneCodeEditor | null>(null);
@@ -139,6 +144,16 @@ export function MarkdownEditor({ threadId }: { threadId: string }) {
       decorationsRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const monaco = monacoRef.current;
+    if (!monaco || !resolvedTheme) return;
+
+    console.log(resolvedTheme);
+    monaco.editor.setTheme(
+      resolvedTheme === "dark" ? "vs-dark" : "vs"
+    );
+  }, [resolvedTheme]);
 
   if (!threadId) return <div>Select a thread</div>;
 
