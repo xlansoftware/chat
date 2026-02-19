@@ -8,7 +8,7 @@ import { PromptProvider } from "@/components/prompt/PromptProvider";
 import './globals.css';
 import { AppHistory } from '@/components/AppHistory';
 
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "@/components/theme-provider"
 
 export default function RootLayout({
   children,
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>xlanchat</title>
       </head>
@@ -25,6 +25,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
+          disableTransitionOnChange
         >
           <SidebarProvider>
             <ConfirmProvider>

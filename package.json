@@ -14,11 +14,6 @@
   "author": "Stoyan Krastev",
   "type": "commonjs",
   "private": true,
-  "workspaces": [
-    "src/chat",
-    "src/mcp-http-gateway",
-    "e2e/tests"
-  ],
   "scripts": {
     "dev": "cd src/chat && npm run dev",
     "test": "cd src/chat && npm run test",

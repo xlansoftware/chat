@@ -14,7 +14,6 @@ export function MarkdownEditor({ threadId }: { threadId: string }) {
   const { content, updateContent, error } = useFileContent(threadId);
 
   const { resolvedTheme } = useTheme();
-  console.log(resolvedTheme);
 
   const editorRef =
     useRef<import("monaco-editor").editor.IStandaloneCodeEditor | null>(null);
@@ -170,6 +169,7 @@ export function MarkdownEditor({ threadId }: { threadId: string }) {
 
         <div className="w-full h-full">
           <Editor
+            theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
             height="100%"
             width="100%"
             language="markdown"

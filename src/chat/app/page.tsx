@@ -3,6 +3,7 @@
 import { AppBreadcrumb } from '@/components/AppBreadcrumb';
 import { AppContent } from '@/components/AppContent';
 import SelectMode from '@/components/SelectMode';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useStorageStore } from '@/store/storage-store';
 import { useEffect } from 'react';
@@ -35,6 +36,7 @@ export default function Home() {
           <AppBreadcrumb />
           <div className="flex-grow" />
           {showSelectMode && <SelectMode />}
+          <ThemeToggle />
         </div>
       </header>
       <div className="flex flex-1 flex-col overflow-hidden">
