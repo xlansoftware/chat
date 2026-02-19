@@ -5,19 +5,16 @@ import { Button } from '@/components/ui/button';
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { getNodeDisplayName } from '@/lib/node-display-name';
 import { NodeActions } from './NodeActions';
 import AppSidebarHeader from './AppSidebarHeader';
-import { cn } from '@/lib/utils';
+import AppSidebarFooter from './AppSidebarFooter';
 
 export function AppSidebar() {
   const {
@@ -175,11 +172,12 @@ export function AppSidebar() {
         </nav>
       </SidebarContent>
 
-      <SidebarFooter>
+      <AppSidebarFooter />
+      {/* <SidebarFooter>
         <div className="px-2 py-2 text-xs text-muted-foreground">
           {children.length} {children.length === 1 ? 'item' : 'items'}
         </div>
-      </SidebarFooter>
+      </SidebarFooter> */}
     </Sidebar>
   );
 }
