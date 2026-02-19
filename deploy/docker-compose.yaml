@@ -18,7 +18,8 @@ services:
       STORAGE_TYPE: filesystem
       DATA_STORE_PATH: /data
       CONFIG_PATH: /config
-      OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       PORT: ${PORT:-3000}
       NODE_ENV: production
       LOG_LEVEL: info
