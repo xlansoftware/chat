@@ -6,8 +6,12 @@ import { ThreadPrimitive } from "@assistant-ui/react";
 
 import useFileContent from "@/hooks/use-file-content";
 
+import { useTheme } from "next-themes";
+
 export function AppFileContent({ path }: { path: string }) {
   const { content, updateContent, error } = useFileContent(path);
+
+  const { resolvedTheme } = useTheme();
 
   const editorRef =
     useRef<import("monaco-editor").editor.IStandaloneCodeEditor | null>(null);
@@ -62,6 +66,7 @@ export function AppFileContent({ path }: { path: string }) {
 
         <div className="w-full h-full">
           <Editor
+            theme={resolvedTheme === "dark" ? "vs-dark" : "vs"}
             height="100%"
             width="100%"
             language={getLanguageFromFilename(path)}

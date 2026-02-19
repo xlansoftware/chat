@@ -8,25 +8,34 @@ import { PromptProvider } from "@/components/prompt/PromptProvider";
 import './globals.css';
 import { AppHistory } from '@/components/AppHistory';
 
+import { ThemeProvider } from "@/components/theme-provider"
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>xlanchat</title>
       </head>
       <body>
-        <SidebarProvider>
-          <ConfirmProvider>
-            <PromptProvider>
-              <AppSidebar />
-              {children}
-            </PromptProvider>
-          </ConfirmProvider>
-        </SidebarProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider>
+            <ConfirmProvider>
+              <PromptProvider>
+                <AppSidebar />
+                {children}
+              </PromptProvider>
+            </ConfirmProvider>
+          </SidebarProvider>
+        </ThemeProvider>
         <AppHistory />
       </body>
     </html>
