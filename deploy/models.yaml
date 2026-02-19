@@ -8,3 +8,6 @@ models:
   - name: gpt-5.2
     url: https://api.openai.com/v1
     api-key: $OPENAI_API_KEY
+  - name: claude-opus-4-6
+    url: https://api.anthropic.com/v1
+    api-key: $ANTHROPIC_API_KEY
